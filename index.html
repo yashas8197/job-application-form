@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body class="container">
+
+  <div class="m-4 border p-3 rounded">
+    <h1 class="text-center py-3">Job Application Form</h1>
+
+    <form id="jobApplication">
+
+      <label>Name:</label>
+      <input id="name" type="text" /><br>
+      <br>
+
+      <label>Email:</label>
+      <input id="email" type="email" /><br>
+      <br>
+
+      <label>Upload Resume:</label>
+      <input id="chooseFile" type="file" /><br>
+      <br>
+
+      <label>Position Applied For:</label>
+      <select id="selectPosition">
+        <option value="Software Engineer">Software Engineer</option>
+        <option value="Data Analyst">Data Analyst</option>
+        <option value="Marketing Specialist">Marketing Specialist</option>
+        <option value="Graphic Designer">Graphic Designer</option>
+        <option value="HR Manager">HR Manager</option>
+      </select>
+      <br>
+      <br>
+
+      <label>Years of Experience:</label><br>
+      <input name="yearsOfExperience" type="radio" value="0-2 years" />0-2 years <br>
+      <input name="yearsOfExperience" type="radio" value="2-5 years" />2-5 years <br>
+      <input name="yearsOfExperience" type="radio" value="5+ years" />5+ years <br>
+      <br><br>
+
+      <label>Skills (check all the aplly):</label><br>
+      <input name="skills" type="checkbox" value="Programming" name="yearsOfExperience" /> Programming <br>
+      <input name="skills" type="checkbox" value="communication" name="yearsOfExperience" />communication <br>
+      <input name="skills" type="checkbox" value="teamWork" name="yearsOfExperience" />teamWork <br>
+      <input name="skills" type="checkbox" value="problem Solving" name="yearsOfExperience" />problem Solving <br>
+      <br><br>
+
+      <label>Additional Information:</label><br>
+      <textarea id="info" rows="6" cols="40"></textarea>
+      <br><br>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+  </div>
+
+  <div id="output" class="card m-3"></div>
+
+
+  <script>
+    const jobApplication = document.querySelector('#jobApplication')
+
+
+    jobApplication.addEventListener('submit', function (e) {
+      e.preventDefault()
+      const name = document.querySelector('#name')
+      const email = document.querySelector('#email')
+      const chooseFile = document.querySelector('#chooseFile')
+      const selectPosition = document.querySelector('#selectPosition')
+      const yearsOfExperience = document.querySelector("input[name='yearsOfExperience']:checked")
+      const skillsCheckboxes = document.querySelectorAll("input[name='skills']:checked")
+      const info = document.querySelector("#info")
+      const output = document.querySelector('#output')
+
+      let skills = [];
+      for (let i = 0; i < skillsCheckboxes.length; i++) {
+        skills.push(skillsCheckboxes[i].value)
+      }
+
+      output.innerHTML = `
+        <div class="card-body">
+         <h1>Application Submitted</h1>
+         <p><label><strong>Name:</strong></label>${name.value}</p>
+         <p><label><strong>Email:</strong></label>${email.value}</p>
+         <p><label><strong>Resume Path:</strong></label>${chooseFile.value}</p>
+         <p><label><strong>Position Applied For:</strong></label>${selectPosition.value}</p>
+         <p><label><strong>Years of Experience:</strong></label>${yearsOfExperience.value}</p>
+         <p><label><strong>Skills:</strong></label>${skills.join(", ")}</p>
+         <p><label><strong>Aditional Information:</strong></label>${info.value}</p>
+        </div>      
+      `
+    })
+
+  </script>
+</body>
+
+</html>
